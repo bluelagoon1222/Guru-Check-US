@@ -137,12 +137,13 @@ def latest_13f_filings(sub):
     rc = sub["filings"]["recent"]
     rows = []
     for i, f in enumerate(rc["form"]):
-        if f == "13F-HR":
-            rows.append({"accn": rc["accessionNumber"][i], "filed": rc["filingDate"][i],
+        if f in ("13F-HR", "13F-HR/A"):
+            rows.append({"accn": rc["accessionNumber"][i], "filed": rc["filingDate"][i], "form": f,
                          "period": rc.get("reportDate", [""] * len(rc["form"]))[i]})
     by_period = {}
-    for r in sorted(rows, key=lambda x: x["filed"]):
-        by_period.setdefault(r["period"], r)         # first original filing for each period
+    for r in sorted(rows, key=lambda x: (x["form"] != "13F-HR", x["filed"])):
+        if r["period"]:
+            by_period.setdefault(r["period"], r)     # original first; an amendment only if no original exists
     return [by_period[k] for k in sorted(by_period, reverse=True)]
 
 
@@ -159,7 +160,16 @@ def fetch_13f_table(cik, accn):
         if "infoTable" in txt:
             best = txt
             break
-    return parse_13f(best) if best else None
+    if not best:
+        return None
+    rows = parse_13f(best)
+    # Some filers still report <value> in thousands of dollars: detect via implied price per share
+    px = sorted(o["value"] / o["shares"] for o in rows.values() if o["unit"] == "SH" and o["shares"] > 0 and not o["put_call"])
+    if px and px[len(px) // 2] < 0.5:
+        for o in rows.values():
+            o["value"] *= 1000
+        rows["__scaled__"] = True
+    return rows
 
 
 def diff_13f(now, prev):
@@ -245,6 +255,8 @@ def build_sec(feed):
                         now = fetch_13f_table(p["cik"], fl[0]["accn"]) or {}
                         prev = fetch_13f_table(p["cik"], fl[1]["accn"]) if len(fl) > 1 else {}
                         prev = prev or {}
+                        scaled = bool(now.pop("__scaled__", False))
+                        prev.pop("__scaled__", None)
                         tot = sum(o["value"] for o in now.values()) or 1
                         hold = sorted(now.values(), key=lambda o: -o["value"])
                         changes = diff_13f(now, prev)
@@ -257,6 +269,7 @@ def build_sec(feed):
                             "holdings": [dict(h, weight=h["value"] / tot) for h in hold[:60]],
                             "changes": {k: [c for c in changes if c["kind"] == k][:40] for k in ("new", "add", "cut", "exit")},
                             "counts": {k: sum(1 for c in changes if c["kind"] == k) for k in ("new", "add", "cut", "exit")},
+                            "scaled_thousands": scaled,
                         }
                         for h in hold[:60]:
                             figi_needed.add(h["cusip"])
@@ -527,8 +540,15 @@ def build_oge(feed):
                     links.append({"url": u, "title": u.rsplit("/", 1)[-1], "month": f"{m.group(1)}-{m.group(2)}" if m else ""})
                 person["entity"] = "백악관 공개 거래보고서 (OGE 278-T)"
             else:
-                base = "https://extapps2.oge.gov/201/Presiden.nsf/PAS%20Index?OpenView&Start=1&Count=3000"
-                html = web_get(base) or ""
+                html = ""
+                for base in ("https://extapps2.oge.gov/201/Presiden.nsf/PAS%20Index?OpenView&Start=1&Count=3000",
+                             "https://extapps2.oge.gov/201/Presiden.nsf/PAS%20Index?OpenView&Start=1&Count=1000",
+                             "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index?OpenView&Start=1&Count=3000"):
+                    html = web_get(base, timeout=90) or ""
+                    if o["match"].split(",")[0] in html:
+                        break
+                if not html:
+                    diag("oge", f"{o['id']}: OGE index empty")
                 m = re.search(r'href="([^"]+Expand=\d+[^"]*)"[^>]*>\s*<img[^>]+alt="Show details for ' + re.escape(o["match"]), html)
                 if m:
                     page = web_get("https://extapps2.oge.gov" + m.group(1).replace("&amp;", "&")) or ""
@@ -539,7 +559,7 @@ def build_oge(feed):
                         url = href if href.startswith("http") else "https://extapps2.oge.gov" + href
                         links.append({"url": url, "title": (title or url.rsplit("/", 1)[-1]).strip(), "month": ""})
                 else:
-                    diag("oge", f"{o['id']}: not found in OGE index")
+                    diag("oge", f"{o['id']}: not found in OGE index (page {len(html)} bytes)")
                 person["entity"] = "OGE 공직자 재산공시"
         except Exception as e:
             diag("oge", f"{o['id']}: {e}")
@@ -547,18 +567,25 @@ def build_oge(feed):
             is_ptr = bool(re.search(r"278[\s\-]?T|Periodic", lk["title"] + lk["url"], re.I))
             if lk["month"] and lk["month"] + "-31" < since:
                 continue
-            c = cache.get(lk["url"])
-            if c is None and is_ptr:
-                blob = web_get(lk["url"], binary=True, timeout=120)
-                if blob:
-                    text, used = ocr_pdf(blob)
-                    rows = parse_oge_text(text)
-                    c = {"rows": rows, "ocr": used, "chars": len(text)}
-                    cache[lk["url"]] = c
-                    save_json("oge_cache.json", cache)
-                    log("oge", o["id"], lk["title"], len(rows), "rows", "ocr" if used else "text")
-            rows = (c or {}).get("rows", [])
-            f = {"title": lk["title"], "url": lk["url"], "ptr": is_ptr, "rows": len(rows), "ocr": (c or {}).get("ocr", False), "month": lk["month"]}
+            c = cache.get(lk["url"]) or {}
+            rows = []
+            if is_ptr:
+                import hashlib
+                tf = DATA / "oge_text" / (hashlib.sha1(lk["url"].encode()).hexdigest()[:16] + ".txt")
+                if not tf.exists():
+                    blob = web_get(lk["url"], binary=True, timeout=120)
+                    if blob:
+                        text, used = ocr_pdf(blob)
+                        tf.parent.mkdir(parents=True, exist_ok=True)
+                        tf.write_text(text, encoding="utf-8")
+                        c = {"ocr": used, "chars": len(text), "file": tf.name}
+                        cache[lk["url"]] = c
+                        save_json("oge_cache.json", cache)
+                if tf.exists():
+                    rows = parse_oge_text(tf.read_text(encoding="utf-8"))
+                    c["rows_n"] = len(rows)
+                    log("oge", o["id"], lk["title"][:50], len(rows), "rows", "ocr" if c.get("ocr") else "text")
+            f = {"title": lk["title"], "url": lk["url"], "ptr": is_ptr, "rows": len(rows), "ocr": c.get("ocr", False), "month": lk["month"]}
             person["filings"].append(f)
             for r in rows:
                 person["tx"].append(dict(r, url=lk["url"], ocr=f["ocr"]))
