@@ -228,8 +228,61 @@ def probe_ark():
         rec("ark_csv", False, error=str(e)[:200])
 
 
+# ------------------------------------------------------------------ round 2: fill the gaps
+def probe_round2():
+    # (a) Jensen Huang CIK from NVIDIA's insider ownership page
+    try:
+        txt = sec_get("https://www.sec.gov/cgi-bin/own-disp?action=getissuer&CIK=0001045810", as_json=False)
+        hits = re.findall(r'CIK=(\d{10})[^>]*>([^<]*HUANG[^<]*)<', txt, re.I)
+        rec("r2_huang_cik", bool(hits), hits=hits[:5], bytes=len(txt), sample=txt[txt.upper().find("HUANG")-300:txt.upper().find("HUANG")+300] if "HUANG" in txt.upper() else txt[:500])
+    except Exception as e:
+        rec("r2_huang_cik", False, error=str(e)[:200])
+    # (b) OGE index: where do the names appear and what do the links look like
+    try:
+        r = requests.get("https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index?OpenView&Start=1&Count=3000",
+                         headers={"User-Agent": BROWSER_UA}, timeout=60)
+        h = r.text
+        ctx = {}
+        for nm in ("Trump", "Warsh", "Bessent", "Lutnick"):
+            i = h.find(nm)
+            ctx[nm] = h[max(0, i - 700): i + 500] if i >= 0 else None
+        hrefs = re.findall(r'href="([^"]+)"', h)[:40]
+        rec("r2_oge_structure", any(ctx.values()), bytes=len(h), hrefs=hrefs, sample=json.dumps(ctx)[:6000])
+    except Exception as e:
+        rec("r2_oge_structure", False, error=str(e)[:200])
+    # (c) White House PTR listing as a second source for the President
+    for u in ("https://www.whitehouse.gov/disclosures/", "https://www.whitehouse.gov/disclosures/financial-disclosures/"):
+        try:
+            r = requests.get(u, headers={"User-Agent": BROWSER_UA}, timeout=30)
+            pdfs = re.findall(r'href="([^"]+Periodic-Transaction-Report[^"]*\.pdf)"', r.text)
+            rec("r2_whitehouse", r.status_code == 200 and bool(pdfs), url=u, status=r.status_code, pdfs=pdfs[:6])
+        except Exception as e:
+            rec("r2_whitehouse", False, url=u, error=str(e)[:200])
+    # (d) Senate eFD with fuller browser headers
+    try:
+        s = requests.Session()
+        s.headers.update({"User-Agent": BROWSER_UA, "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                          "Accept-Language": "en-US,en;q=0.9"})
+        r = s.get("https://efdsearch.senate.gov/search/home/", timeout=30)
+        rec("r2_senate_home", r.status_code == 200, status=r.status_code, sample=r.text[:300])
+    except Exception as e:
+        rec("r2_senate_home", False, error=str(e)[:200])
+    # (e) ARK: find the current holdings CSV link on the fund page
+    for u in ("https://www.ark-funds.com/funds/arkk", "https://ark-funds.com/funds/arkk/"):
+        try:
+            r = requests.get(u, headers={"User-Agent": BROWSER_UA}, timeout=30)
+            csvs = re.findall(r'(https?://[^"\']+\.csv)', r.text)
+            rec("r2_ark_page", bool(csvs), url=u, status=r.status_code, csvs=csvs[:6])
+            if csvs:
+                c = requests.get(csvs[0], headers={"User-Agent": BROWSER_UA}, timeout=30)
+                rec("r2_ark_csv", c.status_code == 200, url=csvs[0], status=c.status_code, sample=c.text[:400])
+                break
+        except Exception as e:
+            rec("r2_ark_page", False, url=u, error=str(e)[:200])
+
+
 if __name__ == "__main__":
-    for fn in (probe_sec, probe_figi, probe_house, probe_senate, probe_oge, probe_ark):
+    for fn in (probe_round2,):
         try:
             fn()
         except Exception as e:
