@@ -1,1 +1,431 @@
-{"status":"not run yet"}
+{
+ "run_at_utc": "2026-11-02T02:02:49",
+ "checks": [
+  {
+   "entity": "BERKSHIRE HATHAWAY INC",
+   "last_13f": [
+    "0001193125-26-352200",
+    "2026-08-14"
+   ],
+   "last_form4": "2026-10-29",
+   "forms_top": {
+    "4": 149,
+    "11-K": 45,
+    "8-K": 28,
+    "SCHEDULE 13G/A": 20,
+    "SC 13G/A": 20,
+    "13F-HR": 14,
+    "424B5": 14,
+    "PX14A6G": 13
+   },
+   "name": "sec_sub_buffett",
+   "ok": true
+  },
+  {
+   "entity": "Pershing Square Capital Management, L.P.",
+   "last_13f": [
+    "0001172661-26-002336",
+    "2026-05-15"
+   ],
+   "last_form4": "2026-06-08",
+   "forms_top": {
+    "DFAN14A": 112,
+    "4": 92,
+    "SC 13D/A": 79,
+    "13F-HR": 47,
+    "SCHEDULE 13D/A": 14,
+    "3": 10,
+    "SC 13D": 9,
+    "SC 13G/A": 9
+   },
+   "name": "sec_sub_ackman",
+   "ok": true
+  },
+  {
+   "entity": "Duquesne Family Office LLC",
+   "last_13f": [
+    "0001536411-26-000006",
+    "2026-08-14"
+   ],
+   "last_form4": null,
+   "forms_top": {
+    "13F-HR": 59,
+    "SC 13G": 4,
+    "SCHEDULE 13G": 3,
+    "N-PX": 3,
+    "13F-HR/A": 3,
+    "SCHEDULE 13G/A": 2,
+    "SC 13G/A": 1
+   },
+   "name": "sec_sub_druckenmiller",
+   "ok": true
+  },
+  {
+   "entity": "Appaloosa LP",
+   "last_13f": [
+    "0001656456-26-000003",
+    "2026-08-14"
+   ],
+   "last_form4": null,
+   "forms_top": {
+    "13F-HR": 42,
+    "PX14A6G": 8,
+    "N-PX": 3,
+    "SC 13G/A": 3,
+    "3": 2,
+    "SC 13G": 2,
+    "SCHEDULE 13D": 1,
+    "SCHEDULE 13G/A": 1
+   },
+   "name": "sec_sub_tepper",
+   "ok": true
+  },
+  {
+   "entity": "Himalaya Capital Management LLC",
+   "last_13f": [
+    "0002043585-26-000022",
+    "2026-08-14"
+   ],
+   "last_form4": null,
+   "forms_top": {
+    "13F-HR": 35,
+    "N-PX": 2,
+    "13F-HR/A": 1
+   },
+   "name": "sec_sub_lilu",
+   "ok": true
+  },
+  {
+   "entity": "BAUPOST GROUP LLC/MA",
+   "last_13f": [
+    "0001061768-26-000010",
+    "2026-08-13"
+   ],
+   "last_form4": "2023-12-06",
+   "forms_top": {
+    "SC 13G/A": 176,
+    "SC 13G": 69,
+    "13F-HR": 68,
+    "SC 13D/A": 37,
+    "4": 17,
+    "SC 13D": 9,
+    "3": 8,
+    "SCHEDULE 13G/A": 6
+   },
+   "name": "sec_sub_klarman",
+   "ok": true
+  },
+  {
+   "entity": "ICAHN CARL C",
+   "last_13f": [
+    "0001539497-26-002243",
+    "2026-08-14"
+   ],
+   "last_form4": "2026-09-25",
+   "forms_top": {
+    "4": 129,
+    "SC 13D/A": 119,
+    "DFAN14A": 59,
+    "SCHEDULE 13D/A": 38,
+    "13F-HR": 23,
+    "SC 13D": 6,
+    "CORRESP": 5,
+    "3": 4
+   },
+   "name": "sec_sub_icahn",
+   "ok": true
+  },
+  {
+   "entity": "SOROS FUND MANAGEMENT LLC",
+   "last_13f": [
+    "0000902664-26-003507",
+    "2026-08-14"
+   ],
+   "last_form4": "2018-08-16",
+   "forms_top": {
+    "SC 13G/A": 155,
+    "4": 76,
+    "SC 13G": 73,
+    "13F-HR": 70,
+    "3": 8,
+    "4/A": 6,
+    "N-PX": 3,
+    "13F-HR/A": 2
+   },
+   "name": "sec_sub_soros",
+   "ok": true
+  },
+  {
+   "entity": "Bridgewater Associates, LP",
+   "last_13f": [
+    "0001350694-26-000003",
+    "2026-08-14"
+   ],
+   "last_form4": null,
+   "forms_top": {
+    "13F-HR": 83,
+    "13F-HR/A": 15,
+    "N-PX": 3,
+    "13FCONP": 2
+   },
+   "name": "sec_sub_dalio",
+   "ok": true
+  },
+  {
+   "entity": "Third Point LLC",
+   "last_13f": [
+    "0001040273-26-000003",
+    "2026-08-14"
+   ],
+   "last_form4": "2022-06-21",
+   "forms_top": {
+    "DFAN14A": 80,
+    "4": 68,
+    "SC 13D/A": 65,
+    "13F-HR": 63,
+    "SC 13G/A": 33,
+    "SC 13G": 24,
+    "3": 14,
+    "SC 13D": 13
+   },
+   "name": "sec_sub_loeb",
+   "ok": true
+  },
+  {
+   "entity": "Elliott Investment Management L.P.",
+   "last_13f": [
+    "0001013594-26-000915",
+    "2026-08-14"
+   ],
+   "last_form4": "2025-08-01",
+   "forms_top": {
+    "DFAN14A": 60,
+    "4": 55,
+    "SC 13D/A": 38,
+    "13F-HR": 26,
+    "SCHEDULE 13D/A": 15,
+    "144": 15,
+    "SC 13G/A": 10,
+    "3": 7
+   },
+   "name": "sec_sub_singer",
+   "ok": true
+  },
+  {
+   "entity": "GATES FOUNDATION TRUST",
+   "last_13f": [
+    "0001104659-26-097175",
+    "2026-08-14"
+   ],
+   "last_form4": "2020-11-27",
+   "forms_top": {
+    "4": 207,
+    "13F-HR": 96,
+    "SC 13G/A": 34,
+    "SC 13G": 19,
+    "3": 7,
+    "SC 13D/A": 7,
+    "SCHEDULE 13G/A": 4,
+    "N-PX": 3
+   },
+   "name": "sec_sub_gates",
+   "ok": true
+  },
+  {
+   "entity": "ARK Investment Management LLC",
+   "last_13f": [
+    "0001104659-26-096910",
+    "2026-08-14"
+   ],
+   "last_form4": "2025-10-08",
+   "forms_top": {
+    "SC 13G/A": 190,
+    "SCHEDULE 13G/A": 97,
+    "SC 13G": 65,
+    "13F-HR": 26,
+    "SCHEDULE 13G": 10,
+    "40-APP": 5,
+    "N-PX": 2,
+    "40-APP/A": 2
+   },
+   "name": "sec_sub_wood",
+   "ok": true
+  },
+  {
+   "entity": "SOFTBANK GROUP CORP.",
+   "last_13f": [
+    "0001062993-26-004387",
+    "2026-08-14"
+   ],
+   "last_form4": "2026-05-29",
+   "forms_top": {
+    "4": 85,
+    "425": 61,
+    "13F-HR": 51,
+    "SC 13D/A": 37,
+    "SC 13G/A": 28,
+    "3": 18,
+    "SC 13G": 16,
+    "SC 13D": 10
+   },
+   "name": "sec_sub_son",
+   "ok": true
+  },
+  {
+   "entity": "Scion Asset Management, LLC",
+   "last_13f": [
+    "0001649339-25-000007",
+    "2025-11-03"
+   ],
+   "last_form4": null,
+   "forms_top": {
+    "13F-HR": 32,
+    "SC 13D/A": 5,
+    "N-PX": 2,
+    "SC 13D": 2,
+    "13F-HR/A": 1
+   },
+   "name": "sec_sub_burry",
+   "ok": true
+  },
+  {
+   "entity": "Musk Elon",
+   "last_13f": null,
+   "last_form4": "2026-06-17",
+   "forms_top": {
+    "4": 117,
+    "SC 13D/A": 20,
+    "SC 13G/A": 14,
+    "3": 4,
+    "SCHEDULE 13G/A": 3,
+    "5": 3,
+    "DFAN14A": 2,
+    "SC 13D": 2
+   },
+   "name": "sec_sub_musk",
+   "ok": true
+  },
+  {
+   "entity": "COXE TENCH",
+   "last_13f": null,
+   "last_form4": "2026-10-09",
+   "forms_top": {
+    "4": 230,
+    "5": 19,
+    "3": 19,
+    "4/A": 10,
+    "144": 8,
+    "144/A": 1,
+    "5/A": 1
+   },
+   "name": "sec_sub_huang",
+   "ok": false
+  },
+  {
+   "entity": "Zuckerberg Mark",
+   "last_13f": null,
+   "last_form4": "2026-09-28",
+   "forms_top": {
+    "4": 225,
+    "144": 174,
+    "SC 13G/A": 1
+   },
+   "name": "sec_sub_zuckerberg",
+   "ok": true
+  },
+  {
+   "entity": "BEZOS JEFFREY P",
+   "last_13f": null,
+   "last_form4": "2026-08-27",
+   "forms_top": {
+    "4": 233,
+    "SC 13G/A": 27,
+    "144": 5,
+    "SCHEDULE 13G/A": 1,
+    "4/A": 1,
+    "SC 13G": 1
+   },
+   "name": "sec_sub_bezos",
+   "ok": true
+  },
+  {
+   "files": [
+    "0001193125-26-352200-index-headers.html",
+    "0001193125-26-352200-index.html",
+    "0001193125-26-352200.txt",
+    "56757.xml",
+    "primary_doc.xml"
+   ],
+   "rows": 89,
+   "sample": " <nameOfIssuer>ALLY FINL INC</nameOfIssuer> <titleOfClass>COM</titleOfClass> <cusip>02005N100</cusip> <value>577211815</value> <shrsOrPrnAmt> <sshPrnamt>12561737</sshPrnamt> <sshPrnamtType>SH</sshPrnamtType> </shrsOrPrnAmt> <investmentDiscretion>DFND</investmentDiscretion> <otherManager>4</otherManager> <votingAuthority> <Sole>12561737</Sole> <Shared>0</Shared> <None>0</None> </votingAuthority> ",
+   "name": "sec_13f_infotable",
+   "ok": true
+  },
+  {
+   "doc": "xslF345X06/wk-form4_1781740812.xml",
+   "sample": "<?xml version=\"1.0\"?> <ownershipDocument> <schemaVersion>X0609</schemaVersion> <documentType>4</documentType> <periodOfReport>2026-02-02</periodOfReport> <notSubjectToSection16>0</notSubjectToSection16> <issuer> <issuerCik>0001181412</issuerCik> <issuerName>SPACE EXPLORATION TECHNOLOGIES CORP</issuerName> <issuerTradingSymbol>SPCX</issuerTradingSymbol> <issuerForeignTradingSymbol></issuerForeignTradingSymbol> </issuer> <reportingOwner> <reportingOwnerId> <rptOwnerCik>0001494730</rptOwnerCik> <rptOwnerName>Musk Elon</rptOwnerName> </reportingOwnerId> <reportingOwnerAddress> <rptOwnerNonUSAddres",
+   "name": "sec_form4_xml",
+   "ok": true
+  },
+  {
+   "status": 200,
+   "tickers": [
+    "AAPL",
+    "BAC",
+    "KO"
+   ],
+   "name": "openfigi",
+   "ok": true
+  },
+  {
+   "zip_files": [
+    "2026FD.txt",
+    "2026FD.xml"
+   ],
+   "members": 1822,
+   "ptr": 447,
+   "pelosi_ptr": 4,
+   "sample": " <Prefix>Hon.</Prefix> <Last>Pelosi</Last> <First>Nancy</First> <Suffix /> <FilingType>P</FilingType> <StateDst>CA11</StateDst> <Year>2026</Year> <FilingDate>10/2/2026</FilingDate> <DocID>20035553</DocID> ",
+   "name": "house_index",
+   "ok": true
+  },
+  {
+   "url": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035553.pdf",
+   "status": 200,
+   "chars": 1027,
+   "sample": "Filing ID #20035553\nP\u0000\u0000\u0000\u0000\u0000\u0000\u0000 T\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 R\u0000\u0000\u0000\u0000\u0000\nClerk of the House of Representatives • Legislative Resource Center • B81 Cannon Building • Washington, DC 20515\nF\u0000\u0000\u0000\u0000 I\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\nName: Hon. Nancy Pelosi\nStatus: Member\nState/District: CA11\nT\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\nID Owner Asset Transaction Date Notification Amount Cap.\nType Date Gains >\n$200?\nSP REOF XXX, LLC [AB] P 09/08/2026 09/08/2026 $500,001 -\n$1,000,000\nF\u0000\u0000\u0000\u0000\u0000 S\u0000\u0000\u0000\u0000\u0000: New\nD\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000: Investment in LLC which is acquiring and managing a commercial office property at 225 Bush Street in San\nFrancisco, CA.\n* For the complete list of asset type abbreviations, please visit https://fd.house.gov/reference/asset-type-codes.aspx.\nI\u0000\u0000\u0000\u0000\u0000\u0000 P\u0000\u0000\u0000\u0000\u0000 O\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\nYes No\nC\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000 \u0000\u0000\u0000 S\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\nI CERTIFY that the statements I have made on the attached Periodic Transaction Report are true, complete, and correct to the best of\nmy knowledge and belief. Further, I CERTIFY that I have disclosed all transactions as required by the STOCK Act.\nDigitally Signed: Hon. Nancy Pelosi , 10/02/2026",
+   "name": "house_ptr_pdf",
+   "ok": true
+  },
+  {
+   "status": 403,
+   "total": null,
+   "sample": "<HTML><HEAD>\n<TITLE>Access Denied</TITLE>\n</HEAD><BODY>\n<H1>Access Denied</H1>\n \nYou don't have permission to access \"http&#58;&#47;&#47;efdsearch&#46;senate&#46;gov&#47;search&#47;report&#47;data&#47;\" on this server.<P>\nReference&#32;&#35;18&#46;172d3e17&#46;1793584977&#46;4cff570c\n<P>https&#58;&#",
+   "name": "senate_efd",
+   "ok": false
+  },
+  {
+   "url": "https://extapps2.oge.gov/201/Presiden.nsf/PAS+Index?OpenView&Start=1&Count=3000",
+   "bytes": 97983,
+   "name": "oge_index",
+   "ok": true
+  },
+  {
+   "counts": {
+    "trump": 0,
+    "warsh": 0,
+    "bessent": 0,
+    "lutnick": 0
+   },
+   "sample": "{\"trump\": [], \"warsh\": [], \"bessent\": [], \"lutnick\": []}",
+   "name": "oge_links",
+   "ok": false
+  },
+  {
+   "status": 404,
+   "sample": "\r\n\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n\r\n    <meta charset=\"utf-8\" />\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\r\n    \n\n\n<link rel=\"canonical\" href=\"\">\n\n<title>Error - ARK Funds</title>\n<meta name=\"description\" content=\"\">\n<meta name=\"twitter:image\" content=\"https://assets.ark-funds.com/media-12243148-2a3e-4996-9763-260f93905eb9/90a5283e-7d28-4d42-90cc-2a48",
+   "name": "ark_csv",
+   "ok": false
+  }
+ ]
+}
