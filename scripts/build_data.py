@@ -629,7 +629,14 @@ def build_oge(feed):
             for r in rows:
                 person["tx"].append(dict(r, url=lk["url"], ocr=f["ocr"]))
         person["tx"].sort(key=lambda r: r["date"], reverse=True)
-        person["last_activity"] = person["tx"][0]["date"] if person["tx"] else ""
+        person["last_activity"] = max([person["tx"][0]["date"] if person["tx"] else ""] +
+                                      [f["month"] for f in person["filings"] if f.get("month")])
+        if not person["filings"] and o.get("manual"):
+            # OGE individual pages redirect when requested from GitHub's servers -> curated facts + source links
+            person["manual"] = o["manual"]
+            person["note"] = "OGE 개별 공시 페이지가 해외 서버 접속을 막아 자동 수집 불가 — 아래 확인된 공시 요약과 원문 링크를 참고"
+            facts = o["manual"].get("facts", [])
+            person["last_activity"] = max([f["date"] for f in facts] or [""])
         for f in person["filings"][:6]:              # recent reports as feed items (filing month as date)
             if not f["ptr"]:
                 continue

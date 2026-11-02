@@ -161,19 +161,42 @@
    "id": "warsh",
    "name_ko": "케빈 워시 연준 의장",
    "source": "oge_pas",
-   "match": "Warsh, Kevin"
+   "match": "Warsh, Kevin",
+   "manual": {
+    "facts": [
+     {
+      "date": "2026-04-14",
+      "text": "인준 전 재산공시: 자산 1억 3,100만~2억 900만달러 (공시는 금액 구간)",
+      "url": "https://www.aljazeera.com/economy/2026/4/14/fed-nominee-warshs-financial-disclosures-point-to-assets-well-over-100m"
+     },
+     {
+      "date": "2026-05-19",
+      "text": "취임 전 1차 자산 처분 내역 공개 — 금융자산을 대부분 처분해 사실상 현금 보유 계획",
+      "url": "https://www.kitco.com/news/off-the-wire/2026-05-19/incoming-fed-chair-warsh-details-first-round-asset-divestments"
+     }
+    ],
+    "link": "https://extapps2.oge.gov/201/Presiden.nsf/PAS%20Index?OpenView"
+   }
   },
   {
    "id": "bessent",
    "name_ko": "스콧 베센트 재무장관",
    "source": "oge_pas",
-   "match": "Bessent, Scott"
+   "match": "Bessent, Scott",
+   "manual": {
+    "facts": [],
+    "link": "https://extapps2.oge.gov/201/Presiden.nsf/PAS%20Index?OpenView"
+   }
   },
   {
    "id": "lutnick",
    "name_ko": "하워드 러트닉 상무장관",
    "source": "oge_pas",
-   "match": "Lutnick, Howard"
+   "match": "Lutnick, Howard",
+   "manual": {
+    "facts": [],
+    "link": "https://extapps2.oge.gov/201/Presiden.nsf/PAS%20Index?OpenView"
+   }
   }
  ]
 }

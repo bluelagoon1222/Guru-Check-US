@@ -178,6 +178,7 @@ function cardStat(p){
   if (p.f13) return `13F ${p.f13.period} · ${usd(p.f13.total_value)} · ${p.f13.positions}종목`;
   if (p.group === "ceo") return `최근 120일 Form 4 ${p.tx.length}건`;
   if (p.group === "congress") return `최근 거래 ${p.tx.length}건`;
+  if (p.group === "official" && p.manual) return p.manual.facts.length ? `확인된 공시 요약 ${p.manual.facts.length}건 · 수동 관리` : "자동 수집 불가 · OGE 원문 링크";
   if (p.group === "official"){ const u = p.filings.filter(f => f.unreadable).length; return `거래보고 ${p.filings.filter(f => f.ptr).length}건 · 판독 ${p.tx.length}건${u ? ` · 판독 불가 ${u}건` : ""}`; }
   return "";
 }
@@ -218,6 +219,14 @@ function renderDetail(p){
   if (p.group === "official" && p.filings.length) tabs.push(["fil", "거래보고서 목록"]);
   if (p.tx.length || p.group !== "investor") tabs.push(["tx", p.group === "congress" ? "거래 내역" : p.group === "official" ? "판독된 거래" : "Form 4 거래"]);
   if (p.filings && p.filings.length && p.group !== "official") tabs.push(["fil", p.group === "investor" || p.group === "ceo" ? "5% 지분 공시" : "공시 원문 목록"]);
+  if (p.manual){
+    h += `<div class="tbl-wrap"><table><thead><tr><th class="l">일자</th><th class="l">확인된 공시 내용</th><th class="l">출처</th></tr></thead><tbody>` +
+      (p.manual.facts.map(f => `<tr><td class="l">${esc(f.date)}</td><td class="l nm">${esc(f.text)} <span class="lab f">확정</span></td><td class="l"><a href="${esc(f.url)}" target="_blank" rel="noopener">보도 원문</a></td></tr>`).join("") ||
+       '<tr><td class="l" colspan="3">아직 정리된 공시 요약이 없습니다.</td></tr>') +
+      `</tbody></table></div><p class="note"><a href="${esc(p.manual.link)}" target="_blank" rel="noopener">OGE 대통령 지명직 재산공시 목록 바로가기 ›</a> (이름을 눌러 개별 공시 PDF 확인)</p>`;
+    $("#detail").innerHTML = h + `</div>`;
+    return;
+  }
   if (!tabs.some(t => t[0] === st.sub)) st.sub = tabs[0] ? tabs[0][0] : "tx";
   if (p.f13) h += `<div class="kv"><span>기준일 <b>${p.f13.period}</b></span><span>제출일 <b>${p.f13.filed}</b></span><span>13F 총액 <b>${usd(p.f13.total_value)}</b></span><span>종목 수 <b>${p.f13.positions}</b></span><span>직전 기준일 <b>${p.f13.prev_period || "—"}</b></span><a href="${esc(p.f13.url)}" target="_blank" rel="noopener">13F 원문</a></div>`;
   if (p.archived) h += `<p class="note">※ 이 운용사는 SEC 등록을 말소해 더 이상 13F를 공시하지 않습니다. 마지막 공시 기준입니다.</p>`;
