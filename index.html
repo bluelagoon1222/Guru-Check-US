@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>구루 포트폴리오 CHECK — 미국 투자 구루·CEO·의회·행정부 공시 추적</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B2D5B'/><circle cx='44' cy='44' r='22' fill='none' stroke='%23F37321' stroke-width='9'/><rect x='58' y='60' width='12' height='28' rx='4' transform='rotate(-45 64 74)' fill='%23F37321'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--orange:#F37321;--orange-soft:#FDE6D5;--orange-ink:#A3460B;--navy:#0B2D5B;--navy-soft:#DCE5F2;--ink:#1B2230;--sub:#5B6475;
+  --line:#E3E6EB;--band:#F4F6F9;--green:#1F7A5A;--font:"Nanum Gothic","Malgun Gothic","Apple SD Gothic Neo",sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;background:#fff;color:var(--ink);font-family:var(--font);font-size:16.5px;line-height:1.55;word-break:keep-all;-webkit-text-size-adjust:100%}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--orange);outline-offset:2px}
+a{color:var(--navy)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 22px}
+header{background:var(--navy);color:#fff;padding:24px 0 20px;border-bottom:4px solid var(--orange)}
+header h1{margin:0;font-size:29px;font-weight:800}
+header p{margin:4px 0 0;color:#C9D6EA;font-size:15.5px}
+.meta{display:flex;flex-wrap:wrap;gap:4px 20px;margin-top:10px;font-size:13.5px;color:#C9D6EA}
+.meta b{color:#fff}
+.lag{display:flex;gap:10px;align-items:flex-start;border:2px solid var(--orange);background:#FFF6EF;border-radius:10px;padding:11px 15px;margin:18px 0 12px;font-size:15px}
+.lag .ic{flex:none;width:22px;height:22px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:2px}
+.lag b{color:var(--orange-ink)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:2px solid var(--navy);margin-top:6px}
+.tab{border:1.5px solid var(--line);border-bottom:0;background:var(--band);padding:10px 18px;border-radius:10px 10px 0 0;font-weight:800;cursor:pointer;font-size:16px;color:var(--sub)}
+.tab[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 10px}
+.bar .lbl{font-size:14px;font-weight:800;color:var(--navy);min-width:52px}
+.chip{border:1.5px solid #C7CDD6;background:#fff;font-weight:700;font-size:14.5px;padding:7px 14px;border-radius:10px;box-shadow:0 2px 0 #DDE2E9;cursor:pointer}
+.chip:hover{border-color:var(--navy)}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 2px 0 #051A38}
+.chip.o[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);box-shadow:0 2px 0 #C95A12}
+.search{border:1.5px solid #C7CDD6;border-radius:10px;padding:8px 12px;font-size:16px;width:260px;max-width:100%}
+/* feed */
+.day{margin:16px 0 4px;font-weight:800;color:var(--navy);font-size:15px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.item{display:grid;grid-template-columns:190px 92px minmax(0,1fr) auto;gap:10px 14px;align-items:start;padding:11px 4px;border-bottom:1px solid var(--line)}
+.who{display:flex;gap:9px;align-items:center;min-width:0;cursor:pointer}
+.av{flex:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px}
+.who b{display:block;font-size:15px;line-height:1.25}
+.who small{display:block;font-size:12px;color:var(--sub);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px}
+.kind{display:inline-block;font-size:12px;font-weight:800;border-radius:5px;padding:2px 7px;text-align:center}
+.k13F{background:var(--navy-soft);color:var(--navy)}.k13D,.k13G{background:#E6F2EC;color:var(--green)}
+.kForm4{background:var(--orange-soft);color:var(--orange-ink)}.kPTR{background:#EFE7FA;color:#5B3A9A}.k278-T{background:#FBE6E6;color:#9B2C2C}
+.what{font-size:15px;min-width:0}
+.what .tk{font-weight:800}
+.what small{display:block;color:var(--sub);font-size:13px}
+.buy{color:#C2410C;font-weight:800}.sell{color:var(--navy);font-weight:800}
+.right{text-align:right;font-size:13px;white-space:nowrap}
+.lab{display:inline-block;font-size:11.5px;font-weight:700;border-radius:3px;padding:1px 6px}
+.lab.f{background:var(--navy-soft);color:var(--navy)}.lab.o{background:#FBE6E6;color:#9B2C2C}
+/* people */
+.grp-h{margin:22px 0 8px;font-size:18px;font-weight:800;color:var(--navy)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;background:#fff;display:flex;gap:10px;align-items:flex-start}
+.card:hover{border-color:var(--navy);box-shadow:0 4px 14px rgba(11,45,91,.08)}
+.card[aria-pressed="true"]{border:2px solid var(--orange)}
+.card .t b{display:block;font-size:16px}
+.card .t small{display:block;font-size:12.5px;color:var(--sub)}
+.card .t .s{font-size:13px;margin-top:4px}
+.arch{font-size:11px;background:var(--band);border:1px solid var(--line);border-radius:3px;padding:0 5px;color:var(--sub);margin-left:4px}
+.detail{border:2px solid var(--navy);border-radius:12px;padding:16px 18px;margin:16px 0}
+.detail h2{margin:0;font-size:21px;color:var(--navy)}
+.kv{display:flex;flex-wrap:wrap;gap:6px 20px;margin:8px 0 12px;font-size:14px;color:var(--sub)}
+.kv b{color:var(--ink)}
+.tbl-wrap{overflow-x:auto;border-top:2px solid var(--navy);margin-top:6px}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{padding:8px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap;font-size:14.5px;vertical-align:top}
+th{background:var(--band);color:var(--sub);font-size:13px}
+th.l,td.l{text-align:left}
+td.nm{white-space:normal;min-width:160px;max-width:300px}
+.bdg{display:inline-block;font-size:11.5px;font-weight:800;border-radius:4px;padding:1px 6px}
+.b-new{background:#FFE8D6;color:#C2410C}.b-add{background:#FEF3C7;color:#92400E}.b-cut{background:var(--navy-soft);color:var(--navy)}.b-exit{background:#E5E7EB;color:#374151}
+.sub-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 4px}
+.note{font-size:13px;color:var(--sub);margin:6px 0}
+.empty{padding:28px;text-align:center;color:var(--sub);border:1px dashed var(--line);border-radius:10px}
+.pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;margin:1px 2px;border:1px solid var(--line);background:#fff}
+.pill.b{border-color:#F7B48A;background:#FFF4EC}.pill.s{border-color:#9FB2CC;background:#F2F6FB}
+footer{margin-top:40px;padding:20px 0 34px;background:var(--band);font-size:13px;color:var(--sub)}
+@media (max-width:760px){
+  .wrap{padding:0 14px}
+  header h1{font-size:23px}
+  .item{grid-template-columns:1fr auto;}
+  .item .what{grid-column:1 / -1}
+  .item .kind{justify-self:end}
+  .item .right{grid-column:1 / -1;text-align:left}
+  .tab{padding:8px 12px;font-size:14.5px}
+  .search{width:100%}
+}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <h1>구루 포트폴리오 CHECK</h1>
+  <p>버핏·캐시 우드 같은 투자 구루부터 빅테크 CEO, 미국 의회, 대통령·연준 의장까지 — 공시로 확인한 매수·매도</p>
+  <div class="meta"><span>데이터 갱신 <b id="gen">—</b></span><span>출처 <b>SEC EDGAR</b> · <b>미 하원 사무처</b> · <b>백악관/OGE(공직자윤리청)</b></span></div>
+</div></header>
+<main class="wrap" id="app"><div class="empty" style="margin-top:30px">데이터를 불러오는 중입니다.</div></main>
+<footer><div class="wrap">모든 정보는 공개 공시를 정리한 것이며 투자 권유가 아닙니다. 공시는 실제 거래보다 늦게 공개되므로 현재 보유 여부와 다를 수 있습니다. 의회·행정부 거래 금액은 원문이 금액 구간으로만 공개됩니다.</div></footer>
+<script>
+const GROUP = {investor:"투자 구루", ceo:"빅테크 CEO", congress:"미국 하원", official:"행정부·연준"};
+const GCOL = {investor:"#0B2D5B", ceo:"#F37321", congress:"#5B3A9A", official:"#9B2C2C"};
+const KIND = {"13F":"13F 분기보유", "13D":"13D 5%↑", "13G":"13G 5%↑", "Form4":"Form 4", "PTR":"의회 거래", "278-T":"거래보고"};
+const OWNER = {SP:"배우자", JT:"공동", DC:"부양자녀", "":"본인"};
+const CHG = {new:["신규","b-new"], add:["증액","b-add"], cut:["감액","b-cut"], exit:["전량매도","b-exit"]};
+let D, P = {}, st = {tab:"feed", grp:"all", days:30, open:null, q:"", sub:"hold"};
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const usd = v => { if (v == null) return "—"; const a = Math.abs(v); const s = a >= 1e9 ? (a/1e9).toFixed(2)+"B" : a >= 1e6 ? (a/1e6).toFixed(1)+"M" : a >= 1e3 ? (a/1e3).toFixed(0)+"K" : a.toFixed(0); return (v < 0 ? "-$" : "$") + s; };
+const num = v => v == null ? "—" : Math.round(v).toLocaleString("ko-KR");
+const pct = (v, d=1) => v == null ? "—" : (v*100).toFixed(d) + "%";
+const tick = c => (D.cusip_ticker || {})[c] || "";
+const ini = p => (p.name_ko || "?").replace(/\s+/g,"").slice(0,1);
+const av = p => `<span class="av" style="background:${GCOL[p.group]||"#5B6475"}">${esc(ini(p))}</span>`;
+
+fetch("data/guru.json?v=" + Date.now()).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+  .then(js => { D = js; D.people.forEach(p => P[p.id] = p); render(); })
+  .catch(e => { $("#app").innerHTML = `<div class="empty" style="margin-top:30px">데이터 파일을 읽지 못했습니다: ${esc(e.message)}</div>`; });
+
+function render(){
+  if (D.status !== "ok"){ $("#app").innerHTML = '<div class="empty" style="margin-top:30px">첫 데이터 수집 전입니다.</div>'; return; }
+  $("#gen").textContent = new Date(D.generated_at).toLocaleString("ko-KR",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}) + " (KST)";
+  $("#app").innerHTML = `
+    <div class="lag" role="note"><span class="ic">!</span><div><b>공시는 실제 거래보다 늦게 공개됩니다.</b> 13F(분기 보유) 분기 말 후 최대 45일 · 의회 거래 최대 45일 · 대통령·고위직 거래보고 30~45일(지연 제출 있음) · Form 4(CEO·대주주) 2영업일 · 13D 5영업일</div></div>
+    <div class="tabs" role="tablist">
+      ${[["feed","① 신규 공시"],["people","② 인물별 포트폴리오"],["search","③ 종목 검색"],["cons","④ 공통 매수 랭킹"]].map(([k,t]) => `<button class="tab" role="tab" aria-selected="${st.tab===k}" data-t="${k}">${t}</button>`).join("")}
+    </div>
+    <div id="pane"></div>`;
+  document.querySelectorAll(".tab").forEach(b => b.onclick = () => { st.tab = b.dataset.t; render(); });
+  ({feed:renderFeed, people:renderPeople, search:renderSearch, cons:renderCons})[st.tab]();
+}
+function grpBar(){
+  return `<div class="bar"><span class="lbl">인물</span>${[["all","전체"],["investor","투자 구루"],["ceo","빅테크 CEO"],["congress","미국 하원"],["official","행정부·연준"]].map(([k,t]) => `<button class="chip" aria-pressed="${st.grp===k}" data-g="${k}">${t}</button>`).join("")}</div>`;
+}
+function bindGrp(fn){ document.querySelectorAll("[data-g]").forEach(b => b.onclick = () => { st.grp = b.dataset.g; fn(); }); }
+
+/* ---------- ① feed ---------- */
+function feedLine(f){
+  const p = P[f.pid] || {name_ko:f.pid, group:""};
+  let what = "", right = "";
+  if (f.kind === "13F"){
+    const name = c => { const ch = Object.values(p.f13?.changes || {}).flat().find(x => x.cusip === c); return tick(c) || (ch ? ch.name : c); };
+    what = `<span class="tk">${f.period} 기준 보유 공시</span> — 신규 ${f.counts.new} · 증액 ${f.counts.add} · 감액 ${f.counts.cut} · 전량매도 ${f.counts.exit}
+      <small>${["new","add","cut","exit"].filter(k => f.top[k].length).map(k => `${CHG[k][0]}: ${f.top[k].map(name).map(esc).join(", ")}`).join(" · ")}</small>`;
+  } else if (f.kind === "13D" || f.kind === "13G"){
+    what = `<span class="tk">${esc(f.ticker || "")}</span> ${esc(f.issuer)} — 5% 이상 지분 ${f.amend ? "변동" : "최초"} 공시<small>${esc(f.form)}</small>`;
+  } else if (f.kind === "Form4"){
+    const buy = f.code === "P";
+    what = `<span class="${buy ? "buy" : "sell"}">${esc(f.action)}</span> <span class="tk">${esc(f.ticker)}</span> ${esc(f.issuer)}<small>${num(f.shares)}주 × $${(+f.price).toFixed(2)} = ${usd(f.value)} · 거래일 ${f.date} · 거래 후 보유 ${num(f.after)}주</small>`;
+  } else if (f.kind === "PTR"){
+    what = `<span class="${/매수/.test(f.tx) ? "buy" : "sell"}">${esc(f.tx)}</span> <span class="tk">${esc(f.ticker)}</span> ${esc(f.asset)}<small>${esc(f.amount)} · 거래일 ${f.date} · ${OWNER[f.owner] || f.owner}</small>`;
+  } else if (f.kind === "278-T"){
+    what = `<span class="tk">거래보고서</span> ${esc(f.title || "")} — 판독 ${f.count}건<small>${f.label === "OCR" ? "스캔 문서를 OCR로 판독 · 원문 확인 필요" : ""}</small>`;
+  }
+  right = `<span class="lab ${f.label === "OCR" ? "o" : "f"}">${f.label === "OCR" ? "OCR" : "확정"}</span><br><a href="${esc(f.url)}" target="_blank" rel="noopener">원문</a>`;
+  return `<div class="item"><div class="who" data-p="${esc(f.pid)}">${av(p)}<div><b>${esc(p.name_ko)}</b><small>${esc(GROUP[p.group] || "")} · ${esc(p.entity_sec || p.entity || "")}</small></div></div>
+    <span class="kind k${f.kind}">${KIND[f.kind] || f.kind}</span><div class="what">${what}</div><div class="right">${right}</div></div>`;
+}
+function renderFeed(){
+  const since = new Date(Date.now() - st.days*86400000).toISOString().slice(0,10);
+  const fd = f => f.filed || f.date || "";                       // group by filing date
+  const items = D.feed.filter(f => (st.grp === "all" || (P[f.pid]||{}).group === st.grp) && fd(f) >= since);
+  const days = {}; items.forEach(f => (days[fd(f)] = days[fd(f)] || []).push(f));
+  $("#pane").innerHTML = grpBar() + `<div class="bar"><span class="lbl">기간</span>${[7,30,90].map(n => `<button class="chip o" aria-pressed="${st.days===n}" data-d="${n}">최근 ${n}일</button>`).join("")}<span class="note">공시일 기준 · ${items.length}건</span></div>` +
+    (Object.keys(days).sort().reverse().map(dd => `<div class="day">${dd}</div>` + days[dd].map(feedLine).join("")).join("") || '<div class="empty">해당 기간에 새 공시가 없습니다.</div>');
+  bindGrp(renderFeed);
+  document.querySelectorAll("[data-d]").forEach(b => b.onclick = () => { st.days = +b.dataset.d; renderFeed(); });
+  document.querySelectorAll(".who[data-p]").forEach(w => w.onclick = () => { st.tab = "people"; st.open = w.dataset.p; render(); });
+}
+
+/* ---------- ② people ---------- */
+function cardStat(p){
+  if (p.f13) return `13F ${p.f13.period} · ${usd(p.f13.total_value)} · ${p.f13.positions}종목`;
+  if (p.group === "ceo") return `최근 120일 Form 4 ${p.tx.length}건`;
+  if (p.group === "congress") return `최근 거래 ${p.tx.length}건`;
+  if (p.group === "official") return `거래보고 ${p.filings.length}건 · 판독 ${p.tx.length}건`;
+  return "";
+}
+function renderPeople(){
+  const groups = ["investor","ceo","congress","official"].filter(g => st.grp === "all" || st.grp === g);
+  $("#pane").innerHTML = grpBar() + groups.map(g => {
+    const list = D.people.filter(p => p.group === g);
+    return `<div class="grp-h">${GROUP[g]} <span class="note">${list.length}명</span></div><div class="cards">` + list.map(p => `
+      <div class="card" data-p="${esc(p.id)}" role="button" tabindex="0" aria-pressed="${st.open===p.id}">${av(p)}<div class="t">
+        <b>${esc(p.name_ko)}${p.archived ? '<span class="arch">공시 중단</span>' : ""}</b><small>${esc(p.entity_sec || p.entity || p.name_en || "")}</small>
+        <div class="s">${cardStat(p)}</div><small>최근 공시 ${esc(p.last_activity || "—")}</small></div></div>`).join("") + `</div>` +
+      (st.open && list.some(p => p.id === st.open) ? `<div id="detail"></div>` : "");
+  }).join("");
+  bindGrp(renderPeople);
+  document.querySelectorAll(".card").forEach(c => { const go = () => { st.open = st.open === c.dataset.p ? null : c.dataset.p; st.sub = "hold"; renderPeople(); }; c.onclick = go; c.onkeydown = e => { if (e.key === "Enter") go(); }; });
+  if (st.open && $("#detail")){ renderDetail(P[st.open]); $("#detail").scrollIntoView({behavior:"smooth", block:"start"}); }
+}
+function holdTable(rows, withChg){
+  return `<div class="tbl-wrap"><table><thead><tr><th class="l">티커</th><th class="l">회사</th>${withChg ? '<th class="l">변화</th><th>주식 수 변화</th>' : '<th>비중</th>'}<th>평가액</th><th>주식 수</th></tr></thead><tbody>` +
+    rows.map(h => `<tr><td class="l"><b>${esc(tick(h.cusip) || "—")}</b></td><td class="l nm">${esc(h.name)}${h.put_call ? ` <span class="bdg b-cut">${h.put_call === "PUT" ? "풋옵션" : "콜옵션"}</span>` : ""}</td>
+      ${withChg ? `<td class="l"><span class="bdg ${CHG[h.kind][1]}">${CHG[h.kind][0]}</span></td><td>${h.kind === "new" ? "신규" : h.kind === "exit" ? "-100%" : pct(h.pct)}</td>` : `<td>${pct(h.weight)}</td>`}
+      <td>${usd(h.kind === "exit" ? h.prev_value : h.value)}</td><td>${num(h.kind === "exit" ? h.prev_shares : h.shares)}</td></tr>`).join("") + `</tbody></table></div>`;
+}
+function txTable(p){
+  if (!p.tx.length) return '<div class="empty">최근 거래 공시가 없습니다.</div>';
+  if (p.group === "congress" || p.group === "official")
+    return `<div class="tbl-wrap"><table><thead><tr><th class="l">거래일</th><th class="l">구분</th><th class="l">티커</th><th class="l">자산</th><th>금액 구간</th>${p.group === "congress" ? '<th class="l">명의</th>' : '<th class="l">판독</th>'}<th class="l">원문</th></tr></thead><tbody>` +
+      p.tx.slice(0, 300).map(t => `<tr><td class="l">${esc(t.date)}</td><td class="l"><span class="${/매수/.test(t.tx) ? "buy" : "sell"}">${esc(t.tx)}</span></td><td class="l"><b>${esc(t.ticker || "")}</b></td><td class="l nm">${esc(t.asset)}</td><td>${esc(t.amount)}</td>
+        <td class="l">${p.group === "congress" ? (OWNER[t.owner] || t.owner) : (t.ocr ? '<span class="lab o">OCR</span>' : '<span class="lab f">확정</span>')}</td><td class="l"><a href="${esc(t.url)}" target="_blank" rel="noopener">PDF</a></td></tr>`).join("") + `</tbody></table></div>` + (p.tx.length > 300 ? `<p class="note">최근 300건만 표시</p>` : "");
+  return `<div class="tbl-wrap"><table><thead><tr><th class="l">거래일</th><th class="l">구분</th><th class="l">티커</th><th class="l">회사</th><th>주식 수</th><th>단가</th><th>금액</th><th>거래 후 보유</th><th class="l">원문</th></tr></thead><tbody>` +
+    p.tx.map(t => `<tr><td class="l">${esc(t.date)}</td><td class="l"><span class="${t.code === "P" ? "buy" : t.code === "S" ? "sell" : ""}">${esc(t.action)}</span></td><td class="l"><b>${esc(t.ticker)}</b></td><td class="l nm">${esc(t.issuer)}</td>
+      <td>${num(t.shares)}</td><td>${t.price ? "$" + (+t.price).toFixed(2) : "—"}</td><td>${t.value ? usd(t.value) : "—"}</td><td>${num(t.after)}</td><td class="l"><a href="${esc(t.url)}" target="_blank" rel="noopener">원문</a></td></tr>`).join("") + `</tbody></table></div>`;
+}
+function renderDetail(p){
+  let h = `<div class="detail"><h2>${esc(p.name_ko)} <span class="note">${esc(GROUP[p.group])}</span></h2><div class="kv"><span>공시 주체 <b>${esc(p.entity_sec || p.entity || p.name_en || "")}</b></span><span>최근 공시 <b>${esc(p.last_activity || "—")}</b></span>${p.note ? `<span>※ ${esc(p.note)}</span>` : ""}</div>`;
+  const tabs = [];
+  if (p.f13) tabs.push(["hold","보유 상위"],["new","신규"],["add","증액"],["cut","감액"],["exit","전량매도"]);
+  if (p.tx.length || p.group !== "investor") tabs.push(["tx", p.group === "congress" ? "거래 내역" : p.group === "official" ? "거래보고 판독" : "Form 4 거래"]);
+  if (p.filings && p.filings.length) tabs.push(["fil", p.group === "investor" || p.group === "ceo" ? "5% 지분 공시" : "공시 원문 목록"]);
+  if (!tabs.some(t => t[0] === st.sub)) st.sub = tabs[0] ? tabs[0][0] : "tx";
+  if (p.f13) h += `<div class="kv"><span>기준일 <b>${p.f13.period}</b></span><span>제출일 <b>${p.f13.filed}</b></span><span>13F 총액 <b>${usd(p.f13.total_value)}</b></span><span>종목 수 <b>${p.f13.positions}</b></span><span>직전 기준일 <b>${p.f13.prev_period || "—"}</b></span><a href="${esc(p.f13.url)}" target="_blank" rel="noopener">13F 원문</a></div>`;
+  if (p.archived) h += `<p class="note">※ 이 운용사는 SEC 등록을 말소해 더 이상 13F를 공시하지 않습니다. 마지막 공시 기준입니다.</p>`;
+  h += `<div class="sub-tabs">${tabs.map(([k,t]) => `<button class="chip o" aria-pressed="${st.sub===k}" data-s="${k}">${t}${p.f13 && p.f13.counts[k] != null ? ` ${p.f13.counts[k]}` : ""}</button>`).join("")}</div>`;
+  if (st.sub === "hold") h += holdTable(p.f13.holdings.slice(0, 40), false) + `<p class="note">13F에는 미국 상장 주식·옵션만 포함되며 매매 가격·날짜는 공개되지 않습니다. 기밀 처리된 종목은 빠질 수 있습니다.</p>`;
+  else if (["new","add","cut","exit"].includes(st.sub)) h += p.f13.changes[st.sub].length ? holdTable(p.f13.changes[st.sub], true) : '<div class="empty">해당 변화가 없습니다.</div>';
+  else if (st.sub === "tx") h += txTable(p);
+  else if (st.sub === "fil") h += `<div class="tbl-wrap"><table><thead><tr><th class="l">공시일/월</th><th class="l">내용</th><th class="l">원문</th></tr></thead><tbody>` +
+      p.filings.map(f => `<tr><td class="l">${esc(f.date || f.filed || f.month || "")}</td><td class="l nm">${f.issuer ? `<b>${esc(f.ticker || "")}</b> ${esc(f.issuer)} · ${esc(f.form)}` : esc(f.title || f.doc || "")}${f.rows != null ? ` · 판독 ${f.rows}건${f.ocr ? " (OCR)" : ""}` : ""}${f.parsed != null ? ` · 판독 ${f.parsed}건${f.text ? "" : " (스캔본)"}` : ""}</td><td class="l"><a href="${esc(f.url)}" target="_blank" rel="noopener">원문</a></td></tr>`).join("") + `</tbody></table></div>`;
+  $("#detail").innerHTML = h + `</div>`;
+  document.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { st.sub = b.dataset.s; renderDetail(p); });
+}
+
+/* ---------- ③ search ---------- */
+function renderSearch(){
+  $("#pane").innerHTML = `<div class="bar"><span class="lbl">종목</span><input class="search" id="q" placeholder="티커 또는 회사명 (예: NVDA, Apple)" value="${esc(st.q)}"><span class="note">구루 13F 보유·변화, CEO·대주주 Form 4, 의회·행정부 거래를 한 번에 찾습니다</span></div><div id="res"></div>`;
+  const run = () => {
+    const q = st.q.trim().toUpperCase(); const box = $("#res");
+    if (q.length < 2){ box.innerHTML = '<div class="empty">두 글자 이상 입력하세요.</div>'; return; }
+    const hit = s => String(s || "").toUpperCase().includes(q);
+    const rows = [];
+    D.people.forEach(p => {
+      if (p.f13){
+        p.f13.holdings.forEach(h => { if (hit(tick(h.cusip)) || hit(h.name)) rows.push({p, src:"13F 보유", d:p.f13.period, what:`${pct(h.weight)} 비중 · ${usd(h.value)} · ${num(h.shares)}주`, url:p.f13.url}); });
+        ["new","add","cut","exit"].forEach(k => p.f13.changes[k].forEach(c => { if (hit(tick(c.cusip)) || hit(c.name)) rows.push({p, src:"13F " + CHG[k][0], d:p.f13.period, what:`${k === "new" ? "신규" : k === "exit" ? "전량매도" : pct(c.pct)} · ${usd(k === "exit" ? c.prev_value : c.value)}`, url:p.f13.url, buy:k === "new" || k === "add"}); }));
+      }
+      (p.tx || []).forEach(t => { if (hit(t.ticker) || hit(t.issuer) || hit(t.asset)) rows.push({p, src:p.group === "ceo" || p.group === "investor" ? "Form 4" : p.group === "congress" ? "의회 거래" : "거래보고", d:t.date, what:`${t.action || t.tx} · ${t.value ? usd(t.value) : esc(t.amount || "")}`, url:t.url, buy:/매수/.test(t.action || t.tx)}); });
+      (p.filings || []).forEach(f => { if (f.issuer && (hit(f.ticker) || hit(f.issuer))) rows.push({p, src:f.kind === "13D" ? "13D 5%↑" : "13G 5%↑", d:f.date, what:`${esc(f.form)}`, url:f.url}); });
+    });
+    rows.sort((a,b) => (b.d || "").localeCompare(a.d || ""));
+    box.innerHTML = rows.length ? `<div class="tbl-wrap"><table><thead><tr><th class="l">인물</th><th class="l">구분</th><th class="l">기준/거래일</th><th class="l">내용</th><th class="l">원문</th></tr></thead><tbody>` +
+      rows.slice(0, 300).map(r => `<tr><td class="l"><b>${esc(r.p.name_ko)}</b> <span class="note">${esc(GROUP[r.p.group])}</span></td><td class="l">${esc(r.src)}</td><td class="l">${esc(r.d || "")}</td><td class="l ${r.buy ? "buy" : ""}">${r.what}</td><td class="l"><a href="${esc(r.url)}" target="_blank" rel="noopener">원문</a></td></tr>`).join("") + `</tbody></table></div>`
+      : '<div class="empty">찾은 결과가 없습니다.</div>';
+  };
+  $("#q").addEventListener("input", e => { st.q = e.target.value; run(); });
+  run();
+}
+
+/* ---------- ④ consensus ---------- */
+function renderCons(){
+  const c = D.consensus || {};
+  if (!c.rows){ $("#pane").innerHTML = '<div class="empty">13F 데이터가 아직 없습니다.</div>'; return; }
+  $("#pane").innerHTML = `<p class="note" style="margin-top:14px">기준일 <b>${c.period}</b> 13F를 낸 투자 구루들의 변화를 종목별로 모았습니다 (옵션 제외). 매수 = 신규+증액, 매도 = 감액+전량매도.</p>
+    <div class="tbl-wrap"><table><thead><tr><th class="l">순위</th><th class="l">티커</th><th class="l">회사</th><th>매수 인원</th><th class="l">매수한 구루</th><th>매도 인원</th><th class="l">매도한 구루</th></tr></thead><tbody>` +
+    c.rows.slice(0, 60).map((r,i) => `<tr><td class="l">${i+1}</td><td class="l"><b>${esc(tick(r.cusip) || "—")}</b></td><td class="l nm">${esc(r.name)}</td><td><b class="buy">${r.buy.length}</b></td>
+      <td class="l nm">${r.buy.map(b => `<span class="pill b">${esc((P[b.pid]||{}).name_ko || b.pid)} ${CHG[b.kind][0]}</span>`).join("")}</td><td>${r.sell.length}</td>
+      <td class="l nm">${r.sell.map(b => `<span class="pill s">${esc((P[b.pid]||{}).name_ko || b.pid)} ${CHG[b.kind][0]}</span>`).join("")}</td></tr>`).join("") + `</tbody></table></div>`;
+}
+</script>
+</body>
+</html>
