@@ -250,10 +250,18 @@ def build_sec(feed):
                 rc = sub["filings"]["recent"]
                 # ---- 13F
                 if grp == "investor":
-                    fl = latest_13f_filings(sub)
+                    fl = [dict(f, cik=p["cik"]) for f in latest_13f_filings(sub)]
+                    for alt in p.get("alt_ciks", []):            # predecessor / sister entities
+                        asub = sec_get(f"https://data.sec.gov/submissions/CIK{alt:010d}.json")
+                        if asub:
+                            fl += [dict(f, cik=alt) for f in latest_13f_filings(asub)]
+                    best = {}
+                    for f in fl:
+                        best.setdefault(f["period"], f) if f["cik"] == p["cik"] else best.setdefault(f["period"], f)
+                    fl = [best[k] for k in sorted(best, reverse=True)]
                     if fl:
-                        now = fetch_13f_table(p["cik"], fl[0]["accn"]) or {}
-                        prev = fetch_13f_table(p["cik"], fl[1]["accn"]) if len(fl) > 1 else {}
+                        now = fetch_13f_table(fl[0]["cik"], fl[0]["accn"]) or {}
+                        prev = fetch_13f_table(fl[1]["cik"], fl[1]["accn"]) if len(fl) > 1 else {}
                         prev = prev or {}
                         scaled = bool(now.pop("__scaled__", False))
                         prev.pop("__scaled__", None)
@@ -265,7 +273,7 @@ def build_sec(feed):
                             "period": fl[0]["period"], "filed": fl[0]["filed"], "accn": fl[0]["accn"],
                             "prev_period": fl[1]["period"] if len(fl) > 1 else None,
                             "total_value": tot, "positions": len(now),
-                            "url": edgar_url(p["cik"], fl[0]["accn"]),
+                            "url": edgar_url(fl[0]["cik"], fl[0]["accn"]),
                             "holdings": [dict(h, weight=h["value"] / tot) for h in hold[:60]],
                             "changes": {k: [c for c in changes if c["kind"] == k][:40] for k in ("new", "add", "cut", "exit")},
                             "counts": {k: sum(1 for c in changes if c["kind"] == k) for k in ("new", "add", "cut", "exit")},
@@ -491,11 +499,14 @@ def ocr_pdf(blob, max_pages=150):
         from pdf2image import convert_from_bytes
         import pytesseract
         out = []
+        from PIL import ImageOps, ImageFilter
         for i in range(1, min(n or max_pages, max_pages) + 1):
-            imgs = convert_from_bytes(blob, dpi=200, first_page=i, last_page=i)
+            imgs = convert_from_bytes(blob, dpi=300, first_page=i, last_page=i)
             if not imgs:
                 break
-            out.append(pytesseract.image_to_string(imgs[0], config="--psm 6"))
+            g = ImageOps.autocontrast(ImageOps.grayscale(imgs[0]))
+            g = g.filter(ImageFilter.SHARPEN).point(lambda v: 255 if v > 165 else 0)
+            out.append(pytesseract.image_to_string(g, config="--oem 1 --psm 6"))
         return "\n".join(out), True
     except Exception as e:
         diag("oge", f"ocr failed: {e}")
@@ -555,9 +566,12 @@ def build_oge(feed):
                     i = page.find(o["match"])
                     j = page.find("Show details for", i + 50)
                     seg = page[i: j if j > 0 else i + 20000]
-                    for href, title in re.findall(r'href="([^"]+\$FILE/[^"]+\.pdf)"[^>]*>([^<]*)<', seg, re.I):
-                        url = href if href.startswith("http") else "https://extapps2.oge.gov" + href
+                    for href, title in re.findall(r'href="([^"]+\.pdf)"[^>]*>([^<]*)<', seg, re.I):
+                        href = href.replace("&amp;", "&")
+                        url = href if href.startswith("http") else "https://extapps2.oge.gov" + (href if href.startswith("/") else "/201/Presiden.nsf/" + href)
                         links.append({"url": url, "title": (title or url.rsplit("/", 1)[-1]).strip(), "month": ""})
+                    if not links:
+                        diag("oge", f"{o['id']}: no pdf links in expanded section; sample=" + re.sub(r"\s+", " ", seg[:1800]))
                 else:
                     diag("oge", f"{o['id']}: not found in OGE index (page {len(html)} bytes)")
                 person["entity"] = "OGE 공직자 재산공시"
@@ -572,13 +586,15 @@ def build_oge(feed):
             if is_ptr:
                 import hashlib
                 tf = DATA / "oge_text" / (hashlib.sha1(lk["url"].encode()).hexdigest()[:16] + ".txt")
+                if tf.exists() and c.get("ocr") and c.get("ocr_v") != 2 and not c.get("rows_n"):
+                    tf.unlink()                                  # redo low-quality OCR from the first version
                 if not tf.exists():
                     blob = web_get(lk["url"], binary=True, timeout=120)
                     if blob:
                         text, used = ocr_pdf(blob)
                         tf.parent.mkdir(parents=True, exist_ok=True)
                         tf.write_text(text, encoding="utf-8")
-                        c = {"ocr": used, "chars": len(text), "file": tf.name}
+                        c = {"ocr": used, "ocr_v": 2, "chars": len(text), "file": tf.name}
                         cache[lk["url"]] = c
                         save_json("oge_cache.json", cache)
                 if tf.exists():

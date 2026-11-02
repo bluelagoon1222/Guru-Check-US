@@ -11,9 +11,12 @@
   {
    "id": "ackman",
    "name_ko": "빌 애크먼",
-   "entity": "Pershing Square",
-   "cik": 1336528,
-   "expect": "PERSHING"
+   "entity": "Pershing Square (Pershing Square Inc. since 2026 Q2)",
+   "cik": 2026053,
+   "expect": "PERSHING",
+   "alt_ciks": [
+    1336528
+   ]
   },
   {
    "id": "druckenmiller",
