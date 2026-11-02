@@ -12,6 +12,7 @@ Output: data/guru.json  (+ caches data/*.json so PDFs/OCR are processed once)
 Each section is isolated: a failure in one source never blocks the others.
 """
 import datetime as dt
+import html as htmlmod
 import io
 import json
 import os
@@ -126,7 +127,7 @@ def parse_13f(xml):
             sh = int(float(tag(blk, "sshPrnamt") or 0))
         except ValueError:
             continue
-        o = out.setdefault(key, {"cusip": cusip, "name": tag(blk, "nameOfIssuer"), "cls": tag(blk, "titleOfClass"),
+        o = out.setdefault(key, {"cusip": cusip, "name": htmlmod.unescape(htmlmod.unescape(tag(blk, "nameOfIssuer"))), "cls": tag(blk, "titleOfClass"),
                                  "put_call": pc, "value": 0, "shares": 0, "unit": tag(blk, "sshPrnamtType")})
         o["value"] += val
         o["shares"] += sh

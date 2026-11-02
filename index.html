@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>구루 포트폴리오 CHECK — 미국 투자 구루·CEO·의회·행정부 공시 추적</title>
+<title>GURU 포트폴리오 (주요 정치·경제인 포함) — 미국 투자 구루·빅테크 CEO·의회·행정부 매매 공시</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230B2D5B'/><circle cx='44' cy='44' r='22' fill='none' stroke='%23F37321' stroke-width='9'/><rect x='58' y='60' width='12' height='28' rx='4' transform='rotate(-45 64 74)' fill='%23F37321'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,25 +18,26 @@ button,input{font:inherit;color:inherit}
 a{color:var(--navy)}
 .wrap{max-width:1280px;margin:0 auto;padding:0 22px}
 header{background:var(--navy);color:#fff;padding:24px 0 20px;border-bottom:4px solid var(--orange)}
-header h1{margin:0;font-size:29px;font-weight:800}
-header p{margin:4px 0 0;color:#C9D6EA;font-size:15.5px}
-.meta{display:flex;flex-wrap:wrap;gap:4px 20px;margin-top:10px;font-size:13.5px;color:#C9D6EA}
+header h1{margin:0;font-size:36px;font-weight:800;letter-spacing:-.3px}
+header h1 .en{font-size:17px;font-weight:700;color:var(--orange);margin-left:8px;vertical-align:5px}
+header p{margin:6px 0 0;color:#C9D6EA;font-size:17.5px}
+.meta{display:flex;flex-wrap:wrap;gap:4px 20px;margin-top:10px;font-size:14.5px;color:#C9D6EA}
 .meta b{color:#fff}
-.lag{display:flex;gap:10px;align-items:flex-start;border:2px solid var(--orange);background:#FFF6EF;border-radius:10px;padding:11px 15px;margin:18px 0 12px;font-size:15px}
+.lag{display:flex;gap:10px;align-items:flex-start;border:2px solid var(--orange);background:#FFF6EF;border-radius:10px;padding:12px 16px;margin:18px 0 12px;font-size:16px}
 .lag .ic{flex:none;width:22px;height:22px;border-radius:50%;background:var(--orange);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:2px}
 .lag b{color:var(--orange-ink)}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:2px solid var(--navy);margin-top:6px}
-.tab{border:1.5px solid var(--line);border-bottom:0;background:var(--band);padding:10px 18px;border-radius:10px 10px 0 0;font-weight:800;cursor:pointer;font-size:16px;color:var(--sub)}
+.tab{border:1.5px solid var(--line);border-bottom:0;background:var(--band);padding:12px 22px;border-radius:10px 10px 0 0;font-weight:800;cursor:pointer;font-size:18px;color:var(--sub)}
 .tab[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
 .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0 10px}
-.bar .lbl{font-size:14px;font-weight:800;color:var(--navy);min-width:52px}
-.chip{border:1.5px solid #C7CDD6;background:#fff;font-weight:700;font-size:14.5px;padding:7px 14px;border-radius:10px;box-shadow:0 2px 0 #DDE2E9;cursor:pointer}
+.bar .lbl{font-size:16px;font-weight:800;color:var(--navy);min-width:58px}
+.chip{border:1.5px solid #C7CDD6;background:#fff;font-weight:700;font-size:16px;padding:9px 17px;border-radius:10px;box-shadow:0 2px 0 #DDE2E9;cursor:pointer}
 .chip:hover{border-color:var(--navy)}
 .chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 2px 0 #051A38}
 .chip.o[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);box-shadow:0 2px 0 #C95A12}
 .search{border:1.5px solid #C7CDD6;border-radius:10px;padding:8px 12px;font-size:16px;width:260px;max-width:100%}
 /* feed */
-.day{margin:16px 0 4px;font-weight:800;color:var(--navy);font-size:15px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.day{margin:18px 0 4px;font-weight:800;color:var(--navy);font-size:17px;border-bottom:1px solid var(--line);padding-bottom:4px}
 .item{display:grid;grid-template-columns:190px 92px minmax(0,1fr) auto;gap:10px 14px;align-items:start;padding:11px 4px;border-bottom:1px solid var(--line)}
 .who{display:flex;gap:9px;align-items:center;min-width:0;cursor:pointer}
 .av{flex:none;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:14px}
@@ -53,7 +54,7 @@ header p{margin:4px 0 0;color:#C9D6EA;font-size:15.5px}
 .lab{display:inline-block;font-size:11.5px;font-weight:700;border-radius:3px;padding:1px 6px}
 .lab.f{background:var(--navy-soft);color:var(--navy)}.lab.o{background:#FBE6E6;color:#9B2C2C}
 /* people */
-.grp-h{margin:22px 0 8px;font-size:18px;font-weight:800;color:var(--navy)}
+.grp-h{margin:24px 0 10px;font-size:21px;font-weight:800;color:var(--navy)}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
 .card{border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;background:#fff;display:flex;gap:10px;align-items:flex-start}
 .card:hover{border-color:var(--navy);box-shadow:0 4px 14px rgba(11,45,91,.08)}
@@ -63,7 +64,7 @@ header p{margin:4px 0 0;color:#C9D6EA;font-size:15.5px}
 .card .t .s{font-size:13px;margin-top:4px}
 .arch{font-size:11px;background:var(--band);border:1px solid var(--line);border-radius:3px;padding:0 5px;color:var(--sub);margin-left:4px}
 .detail{border:2px solid var(--navy);border-radius:12px;padding:16px 18px;margin:16px 0}
-.detail h2{margin:0;font-size:21px;color:var(--navy)}
+.detail h2{margin:0;font-size:24px;color:var(--navy)}
 .kv{display:flex;flex-wrap:wrap;gap:6px 20px;margin:8px 0 12px;font-size:14px;color:var(--sub)}
 .kv b{color:var(--ink)}
 .tbl-wrap{overflow-x:auto;border-top:2px solid var(--navy);margin-top:6px}
@@ -75,6 +76,7 @@ td.nm{white-space:normal;min-width:160px;max-width:300px}
 .bdg{display:inline-block;font-size:11.5px;font-weight:800;border-radius:4px;padding:1px 6px}
 .b-new{background:#FFE8D6;color:#C2410C}.b-add{background:#FEF3C7;color:#92400E}.b-cut{background:var(--navy-soft);color:var(--navy)}.b-exit{background:#E5E7EB;color:#374151}
 .sub-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 4px}
+.scope{border-left:4px solid var(--orange);background:#FFF6EF;padding:9px 13px;font-size:15px;margin:4px 0 8px;border-radius:0 8px 8px 0}
 .note{font-size:13px;color:var(--sub);margin:6px 0}
 .empty{padding:28px;text-align:center;color:var(--sub);border:1px dashed var(--line);border-radius:10px}
 .pill{display:inline-block;font-size:12px;border-radius:999px;padding:1px 8px;margin:1px 2px;border:1px solid var(--line);background:#fff}
@@ -82,20 +84,23 @@ td.nm{white-space:normal;min-width:160px;max-width:300px}
 footer{margin-top:40px;padding:20px 0 34px;background:var(--band);font-size:13px;color:var(--sub)}
 @media (max-width:760px){
   .wrap{padding:0 14px}
-  header h1{font-size:23px}
+  header h1{font-size:27px}
+  header h1 .en{display:block;margin:2px 0 0;font-size:14px}
+  header p{font-size:15px}
+  .chip{font-size:15px;padding:8px 13px}
   .item{grid-template-columns:1fr auto;}
   .item .what{grid-column:1 / -1}
   .item .kind{justify-self:end}
   .item .right{grid-column:1 / -1;text-align:left}
-  .tab{padding:8px 12px;font-size:14.5px}
+  .tab{padding:9px 12px;font-size:15.5px}
   .search{width:100%}
 }
 </style>
 </head>
 <body>
 <header><div class="wrap">
-  <h1>구루 포트폴리오 CHECK</h1>
-  <p>버핏·캐시 우드 같은 투자 구루부터 빅테크 CEO, 미국 의회, 대통령·연준 의장까지 — 공시로 확인한 매수·매도</p>
+  <h1>GURU 포트폴리오 <span class="en">(주요 정치·경제인 포함)</span></h1>
+  <p>투자 구루 · 빅테크 CEO · 미국 의회 · 대통령·연준 — 공시로 확인한 매수·매도</p>
   <div class="meta"><span>데이터 갱신 <b id="gen">—</b></span><span>출처 <b>SEC EDGAR</b> · <b>미 하원 사무처</b> · <b>백악관/OGE(공직자윤리청)</b></span></div>
 </div></header>
 <main class="wrap" id="app"><div class="empty" style="margin-top:30px">데이터를 불러오는 중입니다.</div></main>
@@ -117,9 +122,14 @@ const ini = p => (p.name_ko || "?").replace(/\s+/g,"").slice(0,1);
 const av = p => `<span class="av" style="background:${GCOL[p.group]||"#5B6475"}">${esc(ini(p))}</span>`;
 
 fetch("data/guru.json?v=" + Date.now()).then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
-  .then(js => { D = js; D.people.forEach(p => P[p.id] = p); render(); })
+  .then(js => { D = js; D.people.forEach(p => { P[p.id] = p; fixNames(p); }); render(); })
   .catch(e => { $("#app").innerHTML = `<div class="empty" style="margin-top:30px">데이터 파일을 읽지 못했습니다: ${esc(e.message)}</div>`; });
 
+/* older data files may carry HTML-escaped issuer names ("INTER &amp; CO") */
+function fixNames(p){
+  const f = o => { if (o && typeof o.name === "string") o.name = o.name.replace(/&amp;/g, "&"); };
+  if (p.f13){ p.f13.holdings.forEach(f); Object.values(p.f13.changes).forEach(l => l.forEach(f)); }
+}
 function render(){
   if (D.status !== "ok"){ $("#app").innerHTML = '<div class="empty" style="margin-top:30px">첫 데이터 수집 전입니다.</div>'; return; }
   $("#gen").textContent = new Date(D.generated_at).toLocaleString("ko-KR",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}) + " (KST)";
@@ -175,7 +185,7 @@ function renderFeed(){
 
 /* ---------- ② people ---------- */
 function cardStat(p){
-  if (p.f13) return `13F ${p.f13.period} · ${usd(p.f13.total_value)} · ${p.f13.positions}종목`;
+  if (p.f13) return `13F ${p.f13.period} · 신고액 ${usd(p.f13.total_value)} · ${p.f13.positions}종목`;
   if (p.group === "ceo") return `최근 120일 Form 4 ${p.tx.length}건`;
   if (p.group === "congress") return `최근 거래 ${p.tx.length}건`;
   if (p.group === "official" && p.manual) return p.manual.facts.length ? `확인된 공시 요약 ${p.manual.facts.length}건 · 수동 관리` : "자동 수집 불가 · OGE 원문 링크";
@@ -197,7 +207,7 @@ function renderPeople(){
   if (st.open && $("#detail")){ renderDetail(P[st.open]); $("#detail").scrollIntoView({behavior:"smooth", block:"start"}); }
 }
 function holdTable(rows, withChg){
-  return `<div class="tbl-wrap"><table><thead><tr><th class="l">티커</th><th class="l">회사</th>${withChg ? '<th class="l">변화</th><th>주식 수 변화</th>' : '<th>비중</th>'}<th>평가액</th><th>주식 수</th></tr></thead><tbody>` +
+  return `<div class="tbl-wrap"><table><thead><tr><th class="l">티커</th><th class="l">회사</th>${withChg ? '<th class="l">변화</th><th>주식 수 변화</th>' : '<th>13F 내 비중</th>'}<th>평가액</th><th>주식 수</th></tr></thead><tbody>` +
     rows.map(h => `<tr><td class="l"><b>${esc(tick(h.cusip) || "—")}</b></td><td class="l nm">${esc(h.name)}${h.put_call ? ` <span class="bdg b-cut">${h.put_call === "PUT" ? "풋옵션" : "콜옵션"}</span>` : ""}</td>
       ${withChg ? `<td class="l"><span class="bdg ${CHG[h.kind][1]}">${CHG[h.kind][0]}</span></td><td>${h.kind === "new" ? "신규" : h.kind === "exit" ? "-100%" : pct(h.pct)}</td>` : `<td>${pct(h.weight)}</td>`}
       <td>${usd(h.kind === "exit" ? h.prev_value : h.value)}</td><td>${num(h.kind === "exit" ? h.prev_shares : h.shares)}</td></tr>`).join("") + `</tbody></table></div>`;
@@ -228,7 +238,8 @@ function renderDetail(p){
     return;
   }
   if (!tabs.some(t => t[0] === st.sub)) st.sub = tabs[0] ? tabs[0][0] : "tx";
-  if (p.f13) h += `<div class="kv"><span>기준일 <b>${p.f13.period}</b></span><span>제출일 <b>${p.f13.filed}</b></span><span>13F 총액 <b>${usd(p.f13.total_value)}</b></span><span>종목 수 <b>${p.f13.positions}</b></span><span>직전 기준일 <b>${p.f13.prev_period || "—"}</b></span><a href="${esc(p.f13.url)}" target="_blank" rel="noopener">13F 원문</a></div>`;
+  if (p.f13) h += `<div class="kv"><span>기준일 <b>${p.f13.period}</b></span><span>제출일 <b>${p.f13.filed}</b></span><span>13F 신고 총액 <b>${usd(p.f13.total_value)}</b></span><span>종목 수 <b>${p.f13.positions}</b></span><span>직전 기준일 <b>${p.f13.prev_period || "—"}</b></span><a href="${esc(p.f13.url)}" target="_blank" rel="noopener">13F 원문</a></div>`;
+  if (p.f13) h += `<div class="scope">📌 <b>13F는 미국 상장 주식·옵션만 신고</b>합니다. 해외 상장 주식, 비상장 지분, 채권·현금은 빠지므로 <b>"13F 내 비중"은 전체 자산 대비 비중이 아닙니다.</b></div>`;
   if (p.archived) h += `<p class="note">※ 이 운용사는 SEC 등록을 말소해 더 이상 13F를 공시하지 않습니다. 마지막 공시 기준입니다.</p>`;
   h += `<div class="sub-tabs">${tabs.map(([k,t]) => `<button class="chip o" aria-pressed="${st.sub===k}" data-s="${k}">${t}${p.f13 && p.f13.counts[k] != null ? ` ${p.f13.counts[k]}` : ""}</button>`).join("")}</div>`;
   if (st.sub === "hold") h += holdTable(p.f13.holdings.slice(0, 40), false) + `<p class="note">13F에는 미국 상장 주식·옵션만 포함되며 매매 가격·날짜는 공개되지 않습니다. 기밀 처리된 종목은 빠질 수 있습니다.</p>`;
@@ -269,7 +280,7 @@ function renderSearch(){
 function renderCons(){
   const c = D.consensus || {};
   if (!c.rows){ $("#pane").innerHTML = '<div class="empty">13F 데이터가 아직 없습니다.</div>'; return; }
-  $("#pane").innerHTML = `<p class="note" style="margin-top:14px">기준일 <b>${c.period}</b> 13F를 낸 투자 구루들의 변화를 종목별로 모았습니다 (옵션 제외). 매수 = 신규+증액, 매도 = 감액+전량매도.</p>
+  $("#pane").innerHTML = `<div class="scope" style="margin-top:14px">기준일 <b>${c.period}</b> 13F를 낸 투자 구루들의 변화를 종목별로 모았습니다 (옵션 제외). 매수 = 신규+증액, 매도 = 감액+전량매도. <b>13F는 미국 상장 주식만 포함</b>합니다.</div>
     <div class="tbl-wrap"><table><thead><tr><th class="l">순위</th><th class="l">티커</th><th class="l">회사</th><th>매수 인원</th><th class="l">매수한 구루</th><th>매도 인원</th><th class="l">매도한 구루</th></tr></thead><tbody>` +
     c.rows.slice(0, 60).map((r,i) => `<tr><td class="l">${i+1}</td><td class="l"><b>${esc(tick(r.cusip) || "—")}</b></td><td class="l nm">${esc(r.name)}</td><td><b class="buy">${r.buy.length}</b></td>
       <td class="l nm">${r.buy.map(b => `<span class="pill b">${esc((P[b.pid]||{}).name_ko || b.pid)} ${CHG[b.kind][0]}</span>`).join("")}</td><td>${r.sell.length}</td>
