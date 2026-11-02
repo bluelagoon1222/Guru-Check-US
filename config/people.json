@@ -1,0 +1,36 @@
+{
+  "note": "Edit this list. cik = SEC Central Index Key. expect = word that must appear in the SEC entity name (sanity check).",
+  "investors_13f": [
+    {"id": "buffett",     "name_ko": "워런 버핏",        "entity": "Berkshire Hathaway",          "cik": 1067983, "expect": "BERKSHIRE"},
+    {"id": "ackman",      "name_ko": "빌 애크먼",        "entity": "Pershing Square",             "cik": 1336528, "expect": "PERSHING"},
+    {"id": "druckenmiller","name_ko": "스탠리 드러켄밀러","entity": "Duquesne Family Office",      "cik": 1536411, "expect": "DUQUESNE"},
+    {"id": "tepper",      "name_ko": "데이비드 테퍼",    "entity": "Appaloosa",                   "cik": 1656456, "expect": "APPALOOSA"},
+    {"id": "lilu",        "name_ko": "리 루",            "entity": "Himalaya Capital",            "cik": 1709323, "expect": "HIMALAYA"},
+    {"id": "klarman",     "name_ko": "세스 클라먼",      "entity": "Baupost Group",               "cik": 1061768, "expect": "BAUPOST"},
+    {"id": "icahn",       "name_ko": "칼 아이칸",        "entity": "Carl C. Icahn",               "cik": 921669,  "expect": "ICAHN"},
+    {"id": "soros",       "name_ko": "조지 소로스",      "entity": "Soros Fund Management",       "cik": 1029160, "expect": "SOROS"},
+    {"id": "dalio",       "name_ko": "레이 달리오",      "entity": "Bridgewater Associates",      "cik": 1350694, "expect": "BRIDGEWATER"},
+    {"id": "loeb",        "name_ko": "댄 롭",            "entity": "Third Point",                 "cik": 1040273, "expect": "THIRD POINT"},
+    {"id": "singer",      "name_ko": "폴 싱어",          "entity": "Elliott Investment Management","cik": 1791786, "expect": "ELLIOTT"},
+    {"id": "gates",       "name_ko": "빌 게이츠",        "entity": "Gates Foundation Trust",      "cik": 1166559, "expect": "GATES"},
+    {"id": "wood",        "name_ko": "캐시 우드",        "entity": "ARK Investment Management",   "cik": 1697748, "expect": "ARK"},
+    {"id": "son",         "name_ko": "손정의",           "entity": "SoftBank Group",              "cik": 1065521, "expect": "SOFTBANK"},
+    {"id": "burry",       "name_ko": "마이클 버리",      "entity": "Scion Asset Management",      "cik": 1649339, "expect": "SCION", "archived": true}
+  ],
+  "insiders_form4": [
+    {"id": "musk",       "name_ko": "일론 머스크",     "cik": 1494730, "expect": "MUSK"},
+    {"id": "huang",      "name_ko": "젠슨 황",         "cik": 1197647, "expect": "HUANG"},
+    {"id": "zuckerberg", "name_ko": "마크 저커버그",   "cik": 1548760, "expect": "ZUCKERBERG"},
+    {"id": "bezos",      "name_ko": "제프 베이조스",   "cik": 1043298, "expect": "BEZOS"}
+  ],
+  "congress": {
+    "always": [{"id": "pelosi", "name_ko": "낸시 펠로시", "chamber": "house", "last": "Pelosi"}],
+    "auto_top_n": 15
+  },
+  "officials_oge": [
+    {"id": "trump",   "name_ko": "도널드 트럼프 대통령", "match": "Trump"},
+    {"id": "warsh",   "name_ko": "케빈 워시 연준 의장",  "match": "Warsh"},
+    {"id": "bessent", "name_ko": "스콧 베센트 재무장관", "match": "Bessent"},
+    {"id": "lutnick", "name_ko": "하워드 러트닉 상무장관","match": "Lutnick"}
+  ]
+}
