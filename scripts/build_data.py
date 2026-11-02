@@ -357,8 +357,22 @@ def map_cusips(cusips):
             except Exception:
                 time.sleep(5)
         time.sleep(2.6)                  # anonymous limit: 25 requests / minute
+    # second pass for non-US issuers (e.g. Chubb, Swiss CUSIP): retry once without the US exchange filter
+    retry = [c for c in sorted(cusips) if c and cache.get(c) == ""]
+    for i in range(0, len(retry), 10):
+        chunk = retry[i:i + 10]
+        try:
+            r = requests.post("https://api.openfigi.com/v3/mapping", json=[{"idType": "ID_CUSIP", "idValue": c} for c in chunk],
+                              headers={"Content-Type": "application/json"}, timeout=30)
+            for c, x in zip(chunk, r.json()):
+                data = (x or {}).get("data") or []
+                us = [d0 for d0 in data if d0.get("exchCode") in ("US", "UN", "UQ", "UA", "UW")]
+                cache[c] = (us or data)[0].get("ticker", "-") if data else "-"
+        except Exception:
+            pass
+        time.sleep(2.6)
     save_json("cusip_map.json", cache)
-    CUSIP_TICKER.update(cache)
+    CUSIP_TICKER.update({k: v for k, v in cache.items() if v and v != "-"})
 
 
 CUSIP_TICKER = {}
@@ -562,10 +576,18 @@ def build_oge(feed):
                     diag("oge", f"{o['id']}: OGE index empty")
                 m = re.search(r'href="([^"]+Expand=\d+[^"]*)"[^>]*>\s*<img[^>]+alt="Show details for ' + re.escape(o["match"]), html)
                 if m:
-                    page = web_get("https://extapps2.oge.gov" + m.group(1).replace("&amp;", "&")) or ""
-                    i = page.find(o["match"])
-                    j = page.find("Show details for", i + 50)
-                    seg = page[i: j if j > 0 else i + 20000]
+                    exp_url = "https://extapps2.oge.gov" + m.group(1).replace("&amp;", "&").split("#")[0]
+                    page = web_get(exp_url, timeout=150) or ""
+                    last = o["match"].split(",")[0]
+                    i = page.find("Hide details for " + o["match"])
+                    if i < 0:
+                        i = page.find(o["match"])
+                    if i < 0:
+                        i = page.find(last)
+                    j = page.find("details for", i + 60) if i >= 0 else -1
+                    seg = page[i: j if j > 0 else i + 30000] if i >= 0 else ""
+                    if not seg:
+                        diag("oge", f"{o['id']}: expanded page {len(page)} bytes, name not found; url={exp_url}; head=" + re.sub(r"\s+", " ", page[:600]))
                     for href, title in re.findall(r'href="([^"]+\.pdf)"[^>]*>([^<]*)<', seg, re.I):
                         href = href.replace("&amp;", "&")
                         url = href if href.startswith("http") else "https://extapps2.oge.gov" + (href if href.startswith("/") else "/201/Presiden.nsf/" + href)
@@ -601,17 +623,20 @@ def build_oge(feed):
                     rows = parse_oge_text(tf.read_text(encoding="utf-8"))
                     c["rows_n"] = len(rows)
                     log("oge", o["id"], lk["title"][:50], len(rows), "rows", "ocr" if c.get("ocr") else "text")
-            f = {"title": lk["title"], "url": lk["url"], "ptr": is_ptr, "rows": len(rows), "ocr": c.get("ocr", False), "month": lk["month"]}
+            f = {"title": lk["title"], "url": lk["url"], "ptr": is_ptr, "rows": len(rows), "ocr": c.get("ocr", False), "month": lk["month"],
+                 "unreadable": bool(is_ptr and c.get("ocr") and not rows)}
             person["filings"].append(f)
             for r in rows:
                 person["tx"].append(dict(r, url=lk["url"], ocr=f["ocr"]))
         person["tx"].sort(key=lambda r: r["date"], reverse=True)
         person["last_activity"] = person["tx"][0]["date"] if person["tx"] else ""
-        if person["filings"]:
-            latest = person["filings"][0]
-            feed.append({"date": person["last_activity"] or TODAY.isoformat(), "pid": o["id"], "kind": "278-T",
-                         "count": sum(f["rows"] for f in person["filings"]), "url": latest["url"],
-                         "title": latest["title"], "label": "OCR" if latest["ocr"] else "확정"})
+        for f in person["filings"][:6]:              # recent reports as feed items (filing month as date)
+            if not f["ptr"]:
+                continue
+            fdate = (f["month"] + "-01") if f["month"] else (person["last_activity"] or TODAY.isoformat())
+            feed.append({"date": fdate, "filed": fdate, "pid": o["id"], "kind": "278-T", "count": f["rows"],
+                         "unreadable": f["unreadable"], "url": f["url"], "title": f["title"],
+                         "label": "OCR" if f["ocr"] else "확정"})
         out.append(person)
     save_json("oge_cache.json", cache)
     return out

@@ -153,7 +153,9 @@ function feedLine(f){
   } else if (f.kind === "PTR"){
     what = `<span class="${/매수/.test(f.tx) ? "buy" : "sell"}">${esc(f.tx)}</span> <span class="tk">${esc(f.ticker)}</span> ${esc(f.asset)}<small>${esc(f.amount)} · 거래일 ${f.date} · ${OWNER[f.owner] || f.owner}</small>`;
   } else if (f.kind === "278-T"){
-    what = `<span class="tk">거래보고서</span> ${esc(f.title || "")} — 판독 ${f.count}건<small>${f.label === "OCR" ? "스캔 문서를 OCR로 판독 · 원문 확인 필요" : ""}</small>`;
+    what = f.unreadable
+      ? `<span class="tk">거래보고서 공개</span> ${esc(f.title || "")}<small>저해상도 스캔본이라 자동 판독 불가 → 원문 PDF에서 확인</small>`
+      : `<span class="tk">거래보고서</span> ${esc(f.title || "")} — 판독 ${f.count}건<small>${f.label === "OCR" ? "스캔 문서를 OCR로 판독 · 원문 확인 필요" : "PDF 글자층에서 판독"}</small>`;
   }
   right = `<span class="lab ${f.label === "OCR" ? "o" : "f"}">${f.label === "OCR" ? "OCR" : "확정"}</span><br><a href="${esc(f.url)}" target="_blank" rel="noopener">원문</a>`;
   return `<div class="item"><div class="who" data-p="${esc(f.pid)}">${av(p)}<div><b>${esc(p.name_ko)}</b><small>${esc(GROUP[p.group] || "")} · ${esc(p.entity_sec || p.entity || "")}</small></div></div>
@@ -176,7 +178,7 @@ function cardStat(p){
   if (p.f13) return `13F ${p.f13.period} · ${usd(p.f13.total_value)} · ${p.f13.positions}종목`;
   if (p.group === "ceo") return `최근 120일 Form 4 ${p.tx.length}건`;
   if (p.group === "congress") return `최근 거래 ${p.tx.length}건`;
-  if (p.group === "official") return `거래보고 ${p.filings.length}건 · 판독 ${p.tx.length}건`;
+  if (p.group === "official"){ const u = p.filings.filter(f => f.unreadable).length; return `거래보고 ${p.filings.filter(f => f.ptr).length}건 · 판독 ${p.tx.length}건${u ? ` · 판독 불가 ${u}건` : ""}`; }
   return "";
 }
 function renderPeople(){
@@ -213,8 +215,9 @@ function renderDetail(p){
   let h = `<div class="detail"><h2>${esc(p.name_ko)} <span class="note">${esc(GROUP[p.group])}</span></h2><div class="kv"><span>공시 주체 <b>${esc(p.entity_sec || p.entity || p.name_en || "")}</b></span><span>최근 공시 <b>${esc(p.last_activity || "—")}</b></span>${p.note ? `<span>※ ${esc(p.note)}</span>` : ""}</div>`;
   const tabs = [];
   if (p.f13) tabs.push(["hold","보유 상위"],["new","신규"],["add","증액"],["cut","감액"],["exit","전량매도"]);
-  if (p.tx.length || p.group !== "investor") tabs.push(["tx", p.group === "congress" ? "거래 내역" : p.group === "official" ? "거래보고 판독" : "Form 4 거래"]);
-  if (p.filings && p.filings.length) tabs.push(["fil", p.group === "investor" || p.group === "ceo" ? "5% 지분 공시" : "공시 원문 목록"]);
+  if (p.group === "official" && p.filings.length) tabs.push(["fil", "거래보고서 목록"]);
+  if (p.tx.length || p.group !== "investor") tabs.push(["tx", p.group === "congress" ? "거래 내역" : p.group === "official" ? "판독된 거래" : "Form 4 거래"]);
+  if (p.filings && p.filings.length && p.group !== "official") tabs.push(["fil", p.group === "investor" || p.group === "ceo" ? "5% 지분 공시" : "공시 원문 목록"]);
   if (!tabs.some(t => t[0] === st.sub)) st.sub = tabs[0] ? tabs[0][0] : "tx";
   if (p.f13) h += `<div class="kv"><span>기준일 <b>${p.f13.period}</b></span><span>제출일 <b>${p.f13.filed}</b></span><span>13F 총액 <b>${usd(p.f13.total_value)}</b></span><span>종목 수 <b>${p.f13.positions}</b></span><span>직전 기준일 <b>${p.f13.prev_period || "—"}</b></span><a href="${esc(p.f13.url)}" target="_blank" rel="noopener">13F 원문</a></div>`;
   if (p.archived) h += `<p class="note">※ 이 운용사는 SEC 등록을 말소해 더 이상 13F를 공시하지 않습니다. 마지막 공시 기준입니다.</p>`;
@@ -223,7 +226,7 @@ function renderDetail(p){
   else if (["new","add","cut","exit"].includes(st.sub)) h += p.f13.changes[st.sub].length ? holdTable(p.f13.changes[st.sub], true) : '<div class="empty">해당 변화가 없습니다.</div>';
   else if (st.sub === "tx") h += txTable(p);
   else if (st.sub === "fil") h += `<div class="tbl-wrap"><table><thead><tr><th class="l">공시일/월</th><th class="l">내용</th><th class="l">원문</th></tr></thead><tbody>` +
-      p.filings.map(f => `<tr><td class="l">${esc(f.date || f.filed || f.month || "")}</td><td class="l nm">${f.issuer ? `<b>${esc(f.ticker || "")}</b> ${esc(f.issuer)} · ${esc(f.form)}` : esc(f.title || f.doc || "")}${f.rows != null ? ` · 판독 ${f.rows}건${f.ocr ? " (OCR)" : ""}` : ""}${f.parsed != null ? ` · 판독 ${f.parsed}건${f.text ? "" : " (스캔본)"}` : ""}</td><td class="l"><a href="${esc(f.url)}" target="_blank" rel="noopener">원문</a></td></tr>`).join("") + `</tbody></table></div>`;
+      p.filings.map(f => `<tr><td class="l">${esc(f.date || f.filed || f.month || "")}</td><td class="l nm">${f.issuer ? `<b>${esc(f.ticker || "")}</b> ${esc(f.issuer)} · ${esc(f.form)}` : esc(f.title || f.doc || "")}${f.rows != null ? (f.unreadable ? ' · <b style="color:#9B2C2C">자동 판독 불가 (저해상도 스캔)</b>' : ` · 판독 ${f.rows}건${f.ocr ? " (OCR)" : ""}`) : ""}${f.parsed != null ? ` · 판독 ${f.parsed}건${f.text ? "" : " (스캔본)"}` : ""}</td><td class="l"><a href="${esc(f.url)}" target="_blank" rel="noopener">원문</a></td></tr>`).join("") + `</tbody></table></div>`;
   $("#detail").innerHTML = h + `</div>`;
   document.querySelectorAll("[data-s]").forEach(b => b.onclick = () => { st.sub = b.dataset.s; renderDetail(p); });
 }
